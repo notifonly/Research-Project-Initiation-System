@@ -1,5 +1,8 @@
 import json
-html = open("D:/program/AIscience/dashboard/index_standalone.html", "r", encoding="utf-8").read()
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+html = (ROOT / "index_standalone.html").read_text(encoding="utf-8")
 print(f"Read HTML: {len(html)} chars")
 
 # Encode as base64 for safe transfer
@@ -18,6 +21,5 @@ js = f"""
 }})();
 """
 
-with open("D:/program/AIscience/dashboard/load_dash.js", "w", encoding="utf-8") as f:
-    f.write(js)
+(ROOT / "load_dash.js").write_text(js, encoding="utf-8")
 print(f"Wrote load_dash.js: {len(js)} chars")

@@ -1,7 +1,8 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import sys, os
+from pathlib import Path
 
-os.chdir("D:\\program\\AIscience\\dashboard")
+os.chdir(Path(__file__).resolve().parent)
 
 class Handler(SimpleHTTPRequestHandler):
     def end_headers(self):
