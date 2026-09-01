@@ -208,7 +208,6 @@ Research-Project-Initiation-System/
 - [技能开发指南](docs/SKILL_DEVELOPMENT_GUIDE.md)
 - [故障排查](docs/TROUBLESHOOTING.md)
 - [变更记录](docs/CHANGELOG.md)
-- [求职能力证明](docs/求职能力证明.md)：项目能力、成果数字与面试讲法
 
 ## License
 
