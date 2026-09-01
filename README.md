@@ -208,6 +208,8 @@ Research-Project-Initiation-System/
 - [技能开发指南](docs/SKILL_DEVELOPMENT_GUIDE.md)
 - [故障排查](docs/TROUBLESHOOTING.md)
 - [变更记录](docs/CHANGELOG.md)
+- [计算机论文精读 Skill](skills/计算机论文精读skill.md)
+- [概念解析 Skill](skills/概念解析v2.md)
 
 ## License
 
