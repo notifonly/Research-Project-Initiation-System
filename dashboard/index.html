@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIscience 开题研究看板</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+  <h1><span class="dna">🧬</span> AIscience 开题研究看板</h1>
+  <div class="header-right">
+    <button class="icon-btn" id="themeBtn" title="切换主题">🌙</button>
+    <button class="btn" id="exportBtn" title="导出研究报告">📄 导出报告</button>
+  </div>
+</header>
+<nav class="tabs" id="tabNav" style="display:none"></nav>
+<main id="main"></main>
+<div class="modal-overlay" id="modalOverlay"><div class="modal" id="modalContent"></div></div>
+
+<script src="js/charts.js"></script>
+<script src="js/tabs/overview.js"></script>
+<script src="js/tabs/evidence.js"></script>
+<script src="js/tabs/gaps.js"></script>
+<script src="js/tabs/hypotheses.js"></script>
+<script src="js/tabs/pipeline.js"></script>
+<script src="js/tabs/compare.js"></script>
+<script src="js/tabs/proposals.js"></script>
+<script src="js/tabs/decompose.js"></script>
+<script src="js/tabs/p05.js"></script>
+<script src="js/tabs/p08.js"></script>
+<script src="js/tabs/p09.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

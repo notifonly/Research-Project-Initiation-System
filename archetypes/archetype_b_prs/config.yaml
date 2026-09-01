@@ -1,0 +1,80 @@
+archetype_id: archetype_b_prs
+name: Polygenic Risk Score Methods (PRS)
+description: >
+  Advance PRS methodology: cross-ancestry discovery, transportability,
+  multi-method benchmarking, calibration, clinical cutoffs, cross-trait PRS.
+
+evidence_card_class: archetypes.archetype_b_prs.evidence_card.PRSEvidenceCard
+gap_patterns_module: archetypes.archetype_b_prs.gap_patterns
+gap_patterns_attr: ARCHETYPE_B_GAP_PATTERNS
+
+coverage_axes:
+  - trait
+  - ancestry
+  - prs_method
+  - validation_cohort
+  - transportability
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_prs_study_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+mcp_priorities:
+  high:
+    - gwas_catalog
+    - semantic_scholar
+    - pubmed
+    - github
+  medium:
+    - open_targets
+    - papers_with_code
+    - geo
+    - biorxiv
+  low:
+    - ensembl
+    - encode
+    - cellxgene
+    - scperturb
+    - openreview
+    - huggingface
+
+parameters:
+  max_methods_to_benchmark: 6
+  min_external_validation_cohorts: 2
+  p_value_thresholds_sweep:
+    - 1.0
+    - 0.5
+    - 0.05
+    - 5.0e-8
+  min_ancestry_diversity: 3
+  calibration_assessment_required: true
+  clinical_cutoff_required: true
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

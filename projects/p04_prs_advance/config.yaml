@@ -1,0 +1,103 @@
+project_id: p04_prs_advance
+name: Polygenic risk score methodology advance
+archetype_id: archetype_b_prs
+research_direction: >
+  Advance polygenic risk score (PRS) methodology for cross-ancestry
+  transportability and clinical utility. Benchmark PRS methods (LDpred2,
+  PRS-CS, lassosum, SBayesR, PRS-CSx) across diverse ancestry cohorts,
+  identify gaps in calibration, rare-variant inclusion, and interaction
+  effects, and propose methodological improvements for equitable PRS
+  deployment.
+
+description: >
+  Archetype B (Statistical genetics methods) project. Divergent Step 6
+  (s6a_prs_method_search) searches GWAS Catalog + PapersWithCode + GitHub
+  for PRS method implementations and benchmarking suites.
+
+divergent_step:
+  sid: s6a_prs_method_search
+  description: Search PRS method repos + benchmarking suites (LDpred2, PRS-CS, lassosum, SBayesR)
+  mcps:
+    - gwas_catalog
+    - github
+    - papers_with_code
+    - semantic_scholar
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_prs_study_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s6a_prs_method_search
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+parameters:
+  max_methods_to_benchmark: 6
+  p_value_thresholds_sweep:
+    - 1.0
+    - 0.5
+    - 0.05
+    - 5.0e-8
+  min_ancestry_diversity: 3
+  prs_methods_of_interest:
+    - LDpred2
+    - PRS-CS
+    - PRS-CSx
+    - lassosum
+    - SBayesR
+    - LDpred-fusi
+  benchmark_metrics:
+    - auc
+    - or_per_sd
+    - c_index
+    - r2
+  require_external_validation: true
+
+mcp_priorities:
+  high:
+    - gwas_catalog
+    - semantic_scholar
+    - pubmed
+    - github
+  medium:
+    - papers_with_code
+    - geo
+    - ensembl
+  low:
+    - biorxiv
+    - openreview
+    - huggingface
+    - cellxgene
+    - encode
+    - scperturb
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_locus_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  candidate_driven: true
+  candidate_source: decompose_pilot_results
+  max_candidates: 3
+  min_candidate_score: 0.0
+  candidate_order: shuffle
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

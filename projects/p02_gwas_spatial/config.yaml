@@ -1,0 +1,102 @@
+project_id: p02_gwas_spatial
+name: GWAS + spatial transcriptomics V2G
+archetype_id: archetype_a_v2g
+research_direction: >
+  Resolve causal genes at GWAS lead loci by integrating GWAS colocalization
+  with spatial transcriptomics (ST) profiles. Map variant-to-gene effects
+  within tissue micro-environments (niche-specific eQTL, cell-cell
+  communication context) to nominate context-dependent therapeutic targets.
+
+description: >
+  Prototype A (V2G) project. Divergent Step 6 searches CellxGene + GEO for
+  spatial transcriptomics datasets (10x Visium, Slide-seq, Stereo-seq, MERFISH)
+  matching GWAS lead-locus genes and trait-relevant tissues.
+
+divergent_step:
+  sid: s6a_spatial_dataset_search
+  description: Search CellxGene + GEO for spatial transcriptomics datasets per locus gene / tissue
+  mcps:
+    - cellxgene
+    - geo
+    - encode
+    - github
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_v2g_locus_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s6a_spatial_dataset_search
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s10_functional_evidence_search
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+parameters:
+  max_loci_per_trait: 50
+  max_study_variant_pairs_l2g: 50
+  coloc_pp4_threshold: 0.8
+  significance_p_threshold: 5.0e-8
+  spatial_search_max_genes: 30
+  spatial_assay_keywords:
+    - spatial transcriptomics
+    - Visium
+    - Slide-seq
+    - Stereo-seq
+    - MERFISH
+    - spatial single-cell
+  spatial_tissue_priority:
+    - brain
+    - heart
+    - liver
+    - intestine
+    - skin
+
+mcp_priorities:
+  high:
+    - gwas_catalog
+    - open_targets
+    - semantic_scholar
+    - pubmed
+    - cellxgene
+  medium:
+    - geo
+    - ensembl
+    - encode
+    - scperturb
+  low:
+    - biorxiv
+    - openreview
+    - github
+    - papers_with_code
+    - huggingface
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_locus_terminology
+  - bp3_l1_to_l2
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  candidate_driven: true
+  candidate_source: decompose_pilot_results
+  max_candidates: 3
+  min_candidate_score: 0.0
+  candidate_order: shuffle
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

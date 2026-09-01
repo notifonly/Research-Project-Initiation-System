@@ -1,0 +1,103 @@
+project_id: p07_aging_clock
+name: Multi-omics aging clock
+archetype_id: archetype_d_omics_score
+research_direction: >
+  Develop a multi-omics aging clock integrating DNA methylation,
+  transcriptomic, and proteomic features to predict biological age and
+  age-related disease risk. Survey existing epigenetic clocks (Horvath,
+  GrimAge, PhenoAge, DunedinPACE), identify gaps in multi-omics integration,
+  longitudinal validation, and clinical-score comparison, and propose a
+  unified multi-omics aging clock framework.
+
+description: >
+  Archetype D (Multi-omics phenotypic scoring) project. Divergent Step 6
+  (s6a_aging_clock_search) searches GEO + GitHub + PapersWithCode for aging
+  cohort datasets and epigenetic-clock method implementations.
+
+divergent_step:
+  sid: s6a_aging_clock_search
+  description: Search GEO + GitHub + PapersWithCode for aging cohort datasets & epigenetic clock methods
+  mcps:
+    - geo
+    - github
+    - papers_with_code
+    - semantic_scholar
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_score_method_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s6a_aging_clock_search
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+parameters:
+  min_omics_layers_for_multi: 2
+  min_external_validation_cohorts: 2
+  min_age_range_span_years: 30
+  omics_layers_of_interest:
+    - dna_methylation
+    - transcriptome
+    - proteomics
+    - metabolomics
+  aging_clocks_of_interest:
+    - Horvath
+    - Hannum
+    - GrimAge
+    - PhenoAge
+    - DunedinPACE
+    - epigenetic_clock
+  require_calibration: true
+  require_clinical_cutoff: true
+  require_clinical_score_comparison: true
+  require_longitudinal_eval: true
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - geo
+    - github
+  medium:
+    - papers_with_code
+    - ensembl
+    - cellxgene
+  low:
+    - biorxiv
+    - openreview
+    - huggingface
+    - gwas_catalog
+    - encode
+    - scperturb
+    - open_targets
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_locus_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  candidate_driven: true
+  candidate_source: decompose_pilot_results
+  max_candidates: 3
+  min_candidate_score: 0.0
+  candidate_order: shuffle
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

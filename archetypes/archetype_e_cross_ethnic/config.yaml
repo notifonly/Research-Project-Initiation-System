@@ -1,0 +1,75 @@
+archetype_id: archetype_e_cross_ethnic
+name: Cross-Ethnic Multi-omics Integration (Cross-Ethnic)
+description: >
+  Integrate multi-omics data across populations (Chinese cohort, UK Biobank,
+  FinnGen, etc.) for biomarker portability, PRS transportability, and
+  causal inference across ethnicities. Bridge population genetics with
+  multi-omics phenotyping through systematic cross-ethnic comparison.
+
+evidence_card_class: archetypes.archetype_e_cross_ethnic.evidence_card.CrossEthnicOmicsCard
+gap_patterns_module: archetypes.archetype_e_cross_ethnic.gap_patterns
+gap_patterns_attr: ARCHETYPE_E_GAP_PATTERNS
+
+coverage_axes:
+  - ancestry_comparison
+  - omics_layers
+  - trait
+  - method
+  - portability
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - openalex
+    - crossref
+  medium:
+    - biorxiv
+    - gwas_catalog
+    - open_targets
+    - europepmc
+  low:
+    - geo
+    - cellxgene
+    - ensembl
+    - encode
+
+parameters:
+  min_populations_compared: 2
+  min_omics_layers: 2
+  cross_ethnic_replication_required: true
+  harmonization_method_required: true
+  biobank_diversity_min: 2
+  portability_assessment_required: true
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

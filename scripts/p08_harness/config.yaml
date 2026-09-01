@@ -1,0 +1,58 @@
+project_id: p08_cross_ethnic_multiomics
+harness_name: "P08 跨种族多组学整合 研究方案质量验收"
+
+mcp:
+  search_sources: [semantic_scholar, pubmed, biorxiv, arxiv, medrxiv]
+  max_per_source: 10
+  year_range: "2022-"
+  recent_boost_year: 2024
+  code_sources: [github, zenodo, figshare]
+
+loop:
+  max_iterations: 3
+  pass_threshold: 4.0
+  min_dimension_score: 3.0
+  stagnation_limit: 2
+  max_concurrent_candidates: 3
+
+novelty_check:
+  enabled: true
+  max_claims: 5
+  queries_per_claim: 4
+  top_k_papers: 15
+  max_per_source: 10
+  recent_boost_year: 2024
+  reposition_max_attempts: 1
+
+rubric:
+  literature_coverage:
+    weight: 0.20
+    label_zh: 文献覆盖度
+    label_en: Literature Coverage
+  technical_feasibility:
+    weight: 0.20
+    label_zh: 技术可行性
+    label_en: Technical Feasibility
+  innovation_clarity:
+    weight: 0.20
+    label_zh: 创新性清晰度
+    label_en: Innovation Clarity
+  data_accessibility:
+    weight: 0.15
+    label_zh: 数据可及性
+    label_en: Data Accessibility
+  gap_alignment:
+    weight: 0.10
+    label_zh: 缺口对齐度
+    label_en: Gap Alignment
+  evaluation_rigor:
+    weight: 0.15
+    label_zh: 评估严谨性
+    label_en: Evaluation Rigor
+
+candidates:
+  deep_analysis_count: 10
+  top_n_by_score: true
+
+output:
+  dir: data/p08_harness_output

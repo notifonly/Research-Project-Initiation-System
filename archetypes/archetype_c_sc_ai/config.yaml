@@ -1,0 +1,79 @@
+archetype_id: archetype_c_sc_ai
+name: Single-Cell Multi-omics + AI (Foundation Models)
+description: >
+  Advance single-cell foundation models: multi-omics integration, transfer
+  learning, benchmark standardization, interpretability, scalability.
+
+evidence_card_class: archetypes.archetype_c_sc_ai.evidence_card.SCFMEvidenceCard
+gap_patterns_module: archetypes.archetype_c_sc_ai.gap_patterns
+gap_patterns_attr: ARCHETYPE_C_GAP_PATTERNS
+
+coverage_axes:
+  - task
+  - modality
+  - tissue
+  - model_architecture
+  - evaluation_setting
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_fm_resource_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - huggingface
+    - github
+  medium:
+    - papers_with_code
+    - biorxiv
+    - openreview
+    - cellxgene
+    - geo
+  low:
+    - gwas_catalog
+    - open_targets
+    - ensembl
+    - encode
+    - scperturb
+
+parameters:
+  min_pretrain_cells: 1000000
+  benchmark_datasets_required: 3
+  baseline_methods_required:
+    - pca_logistic
+    - scvi
+    - scanvi
+  transfer_required: true
+  interpretability_required: true
+  weights_release_required: true
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

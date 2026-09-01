@@ -1,0 +1,141 @@
+project_id: p05_sc_multiomics_ai
+name: Single-cell multi-omics foundation models
+archetype_id: archetype_c_sc_ai
+research_direction: >
+  Systematically evaluate and compare single-cell foundation models across
+  architecture families (Transformer, Mamba, Hyena, VQ-VAE, Diffusion, JEPA),
+  modality combinations, training paradigms, and evaluation settings.
+  Investigate and develop AI agent methods for dynamic model selection,
+  adaptive benchmarking, and autonomous bioinformatics analysis in
+  single-cell genomics. Extend benchmarks to include GWAS-informed downstream
+  tasks such as variant-to-gene mapping, cell-type-specific colocalization,
+  and scTWAS to bridge single-cell foundation models with population genetics.
+
+description: >
+  Archetype C (Foundation models) project. S6C (s6c_deep_read) performs
+  automated deep-reading of selected papers with evidence-ledger architecture
+  (facts, claims, judgments, formula analysis) for enriched evidence card extraction.
+
+divergent_step:
+  sid: s6c_deep_read
+  description: Deep-read selected papers with evidence-ledger structured analysis
+  mcps:
+    - semantic_scholar
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_fm_resource_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s6c_deep_read
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+parameters:
+  min_pretrain_cells: 1000000
+  benchmark_datasets_required: 3
+  baseline_methods_required:
+    - pca_logistic
+    - scvi
+    - scanvi
+  foundation_models_of_interest:
+    transformer: [scGPT, scBERT, tGPT, Geneformer, scFoundation]
+    mamba: [GeneMamba, RegFormer, MambaCell]
+    hyena: [scHyena, scLong]
+    vae: [scVI, MultiVI, TotalVI, scArches]
+    vqvae: [cellVQ, scVQ, CLM-X]
+    diffusion: [scDiff, scDDPM]
+    jepa: [scJEPA]
+    llm_based: [CellLM, GenePT, scELMo]
+  require_transfer_eval: true
+  require_interpretability: true
+  require_weights_release: true
+  max_outer_rounds: 8
+
+  deep_read:
+    max_papers_per_candidate: 5
+    max_tier2_papers: 2
+    extraction_text_truncate: 24000
+    formula_confidence_threshold: 0.85
+
+decompose:
+  custom_axes:
+    scfm_depth:
+      architecture_family:
+        label: "架构家族"
+        values_prompt: "Transformer-based / Mamba-based / Hyena-based / VQ-VAE-based / GNN-based / Flow-matching / Diffusion / JEPA"
+      modality_combination:
+        label: "模态组合"
+        values_prompt: "scRNA-seq only / scATAC-seq only / RNA+ATAC / RNA+ATAC+Protein / Spatial+scRNA / Spatial+Histology / LLM-augmented / RNA + GWAS summary statistics / ATAC + GWAS fine-mapping / multi-omics + GWAS catalog"
+      training_paradigm:
+        label: "训练范式"
+        values_prompt: "masked reconstruction / autoregressive / contrastive / flow matching / diffusion / VAE / multi-task"
+      pretraining_corpus:
+        label: "预训练语料"
+        values_prompt: "CELLxGENE / Human Cell Atlas / Tabula Sapiens / Tahoe-100M / DISCO / custom atlas / GTEx-matched scRNA-seq / eQTL catalog + single-cell atlas / OneK1K + GWAS / PsychENCODE + GWAS"
+      evaluation_paradigm:
+        label: "评估范式"
+        values_prompt: "benchmark suite / perturbation prediction / cross-species zero-shot / held-out cell type / batch correction / multi-omics integration / GWAS variant-to-gene mapping / cell-type-specific colocalization / scTWAS prediction / GWAS fine-mapping with scATAC / single-cell eQTL analysis"
+    agent_line:
+      agent_paradigm:
+        label: "Agent 范式"
+        values_prompt: "Router / Bandit / Self-Evolving / LLM-Agent / Automated Experiment Platform"
+      capability:
+        label: "核心能力"
+        values_prompt: "model selection / adaptive benchmarking / autonomous analysis / tool orchestration / GWAS-driven cell type prioritization / variant-to-function annotation / colocalization-aware model selection"
+  agent_discovery:
+    enabled: true
+    seed_sources:
+      - "https://github.com/OmicsML/awesome-foundation-model-single-cell-papers"
+    seed_section: "AI Agents & Platforms"
+    max_agent_candidates: 5
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - huggingface
+    - github
+  medium:
+    - papers_with_code
+    - geo
+    - cellxgene
+  low:
+    - biorxiv
+    - openreview
+    - gwas_catalog
+    - ensembl
+    - encode
+    - scperturb
+    - open_targets
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_locus_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  candidate_driven: true
+  candidate_source: decompose_pilot_results
+  max_candidates: 3
+  max_outer_rounds: 8
+  min_candidate_score: 0.0
+  candidate_order: shuffle
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

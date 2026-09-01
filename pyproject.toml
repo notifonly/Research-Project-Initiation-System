@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aiscience"
+version = "0.1.0"
+description = "AI agent for bioinformatics research topic selection (开题)"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.6",
+    "pydantic-settings>=2.2",
+    "lancedb>=0.6",
+    "pymupdf>=1.24",
+    "litellm>=1.35",
+    "loguru>=0.7",
+    "orjson>=3.10",
+    "rich>=13.7",
+    "PyYAML>=6.0",
+    "tenacity>=8.2",
+    "pypdf>=5.0",
+    "beautifulsoup4>=4.12",
+    "feedparser>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["shared*", "archetypes*", "projects*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"

@@ -1,0 +1,87 @@
+archetype_id: archetype_a_v2g
+name: Variant-to-Function (V2G)
+description: >
+  Map GWAS lead variants to causal genes and functional mechanisms via
+  multi-modal evidence triangulation (eQTL/pQTL/sQTL, perturb-seq, ATAC,
+  colocalization, fine-mapping).
+
+evidence_card_class: archetypes.archetype_a_v2g.evidence_card.V2GEvidenceCard
+gap_patterns_module: archetypes.archetype_a_v2g.gap_patterns
+gap_patterns_attr: ARCHETYPE_A_GAP_PATTERNS
+
+coverage_axes:
+  - trait
+  - locus
+  - functional_modality
+  - cell_type
+  - population_ancestry
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_v2g_locus_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s10_functional_evidence_search
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+mcp_priorities:
+  high:
+    - gwas_catalog
+    - open_targets
+    - semantic_scholar
+    - pubmed
+  medium:
+    - geo
+    - cellxgene
+    - scperturb
+    - ensembl
+    - encode
+  low:
+    - biorxiv
+    - openreview
+    - github
+    - papers_with_code
+    - huggingface
+
+parameters:
+  max_loci_per_trait: 50
+  max_study_variant_pairs_l2g: 50
+  fine_mapping_pip_threshold: 0.1
+  coloc_pp4_threshold: 0.8
+  significance_p_threshold: 5.0e-8
+  min_replication_cohorts: 2
+  ancestry_diversity_min: 2
+
+divergent_step_config:
+  description: >
+    Step 6 diverges per project: project-specific dataset search.
+    p01: scPerturb/GEARS/GEO perturb-seq datasets
+    p02: CellxGene/10x spatial transcriptomics datasets
+    p03: ENCODE cCRE/ChromBPNet/scATAC-seq datasets
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_locus_terminology
+  - bp3_l1_to_l2
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

@@ -1,0 +1,104 @@
+project_id: p06_digital_immune
+name: Digital immune phenotype scoring
+archetype_id: archetype_d_omics_score
+research_direction: >
+  Build a multi-omics digital immunity score integrating immune cell
+  frequencies (flow/CyTOF), transcriptomic immune signatures, and serum
+  proteomics to stratify patients by immune competence. Survey existing
+  immune-scoring approaches, identify gaps in external validation,
+  calibration, and clinical-score comparison, and propose a unified
+  multi-omics immune score framework.
+
+description: >
+  Archetype D (Multi-omics phenotypic scoring) project. Divergent Step 6
+  (s6a_immune_dataset_search) searches GEO + CellxGene + PapersWithCode for
+  immune cell datasets and immune-score method implementations.
+
+divergent_step:
+  sid: s6a_immune_dataset_search
+  description: Search GEO + CellxGene + PapersWithCode for immune cell datasets & immune-score methods
+  mcps:
+    - geo
+    - cellxgene
+    - papers_with_code
+    - github
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_score_method_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s6a_immune_dataset_search
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+parameters:
+  min_omics_layers_for_multi: 2
+  min_external_validation_cohorts: 2
+  min_age_range_span_years: 30
+  omics_layers_of_interest:
+    - flow_cytometry
+    - CyTOF
+    - transcriptome
+    - serum_proteomics
+    - epigenome
+  immune_cell_types:
+    - CD4_T
+    - CD8_T
+    - B_cell
+    - NK
+    - monocyte
+    - DC
+    - neutrophil
+  require_calibration: true
+  require_clinical_cutoff: true
+  require_clinical_score_comparison: true
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - geo
+    - github
+  medium:
+    - cellxgene
+    - papers_with_code
+    - ensembl
+  low:
+    - biorxiv
+    - openreview
+    - huggingface
+    - gwas_catalog
+    - encode
+    - scperturb
+    - open_targets
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_locus_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  candidate_driven: true
+  candidate_source: decompose_pilot_results
+  max_candidates: 3
+  min_candidate_score: 0.0
+  candidate_order: shuffle
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

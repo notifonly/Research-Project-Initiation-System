@@ -1,0 +1,171 @@
+project_id: p08_cross_ethnic_multiomics
+name: 跨种族多组学整合
+description: >
+  基于中国千人队列（蛋白质组、代谢组、全基因组）和 UKB 等国际生物库，
+  开展跨种族多组学整合研究。三条研究线并行：biomarker_portability（生物标志物可移植性）、
+  prs_transportability（PRS 跨种族迁移）、causal_inference（因果推断跨种族验证）。
+
+archetype_id: archetype_e_cross_ethnic
+context_hint: >
+  UK Biobank, FinnGen, 中国千人队列, BioBank Japan
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - openalex
+    - crossref
+  medium:
+    - gwas_catalog
+    - open_targets
+    - biorxiv
+    - europepmc
+  low:
+    - geo
+    - cellxgene
+
+extra_skills:
+  s7_evidence_card_extract:
+    module: shared.skills.skill_07_evidence_card_extract
+    class: EvidenceCardExtract
+
+convergence:
+  strategy: candidate_driven
+  max_candidates: 3
+  shuffle_order: true
+  max_outer_rounds: 8
+
+decompose:
+  custom_axes:
+    biomarker_portability:
+      label: 生物标志物可移植性
+      population_pair:
+        label: 人群对比
+        values_prompt: >
+          EUR vs EAS (UKB vs Chinese cohort), EUR vs AFR (UKB vs PAGE),
+          EUR vs SAS (UKB vs GenIndia), EAS vs AFR, multi-ancestry meta-analysis,
+          Chinese internal (urban vs rural), Chinese vs Japanese (BioBank Japan),
+          EUR vs admixed (UKB vs All of Us)
+      omics_layer:
+        label: 组学层
+        values_prompt: >
+          plasma proteomics (Olink/SomaScan), serum metabolomics (Nightingale NMR),
+          plasma proteomics + metabolomics, proteomics + genomics (pQTL),
+          metabolomics + genomics (mQTL), multi-omics (proteomics+metabolomics+genomics),
+          lipidomics, glycomics
+      biomarker_type:
+        label: 标志物类型
+        values_prompt: >
+          protein biomarker (single), metabolite biomarker (single),
+          multi-marker panel, proteomic risk score (ProRS),
+          metabolomic risk score (MetRS), omics-enhanced clinical model,
+          aging biomarker (proteomic clock), immune biomarker panel
+      portability_method:
+        label: 可移植性方法
+        values_prompt: >
+          direct replication (same model), recalibration, transfer learning,
+          meta-analysis across populations, heterogeneity test (Cochran Q/I2),
+          population-specific model building, multi-population joint model,
+          PUFA (polygenic-transcriptome-translatome unified framework)
+      confounder_adjustment:
+        label: 混杂校正
+        values_prompt: >
+          age+sex only, age+sex+BMI, full demographic+socioeconomic,
+          lifestyle+diet, medication-adjusted, environment-adjusted (air/noise),
+          genetic principal components, multi-variable full adjustment
+
+    prs_transportability:
+      label: PRS 跨种族迁移
+      discovery_pop:
+        label: 发现人群
+        values_prompt: >
+          EUR (UKB), EAS (BBJ), EAS (Chinese cohort), EUR+EAS joint,
+          EUR meta-analysis, EAS meta-analysis, multi-ancestry (EUR+EAS+AFR+SAS),
+          admixed (All of Us)
+      target_pop:
+        label: 目标人群
+        values_prompt: >
+          Chinese cohort (1000-person), UKB EUR, UKB non-EUR, BBJ,
+          PAGE African American, GenIndia South Asian, All of Us,
+          FinnGen
+      trait:
+        label: 表型
+        values_prompt: >
+          type 2 diabetes, coronary artery disease, hypertension,
+          BMI/obesity, lipid traits (LDL/HDL/TG/TC), kidney function (eGFR),
+          liver function (ALT/AST/GGT), inflammatory markers (CRP),
+          type 2 diabetes + related metabolic traits
+      prs_method:
+        label: PRS 方法
+        values_prompt: >
+          PRS-CSx (cross-population), LDpred2 (per-population + meta),
+          Lassosum2, DBSLMM, SDPR, SBayesR, multi-PRS (combining multiple scores),
+          PRS-CS + LDpred2 ensemble
+      omics_enhancement:
+        label: 组学增强
+        values_prompt: >
+          PRS only (baseline), PRS + proteomics, PRS + metabolomics,
+          PRS + proteomics + metabolomics, PRS + omics interaction terms,
+          PRS-stratified omics analysis, omics-calibrated PRS,
+          multi-omics integrated risk score (OMRS)
+
+    causal_inference:
+      label: 因果推断
+      causal_method:
+        label: 因果方法
+        values_prompt: >
+          Mendelian randomization (two-sample), bidirectional MR,
+          multivariable MR (MVMR), mediation MR (two-step),
+          cis-MR + trans-MR, colocalization (coloc/SuSiE),
+          PWAS (proteome-wide association), TWAS + PWAS joint,
+          MR-PheWAS (phenome-wide MR)
+      population:
+        label: 研究人群
+        values_prompt: >
+          EUR (UKB + FinnGen), EAS (Chinese cohort + BBJ),
+          EUR+EAS joint MR, multi-ancestry MR (MR-MEGA style),
+          EUR discovery + EAS replication, EAS discovery + EUR replication,
+          UKB internal (EUR vs non-EUR), Chinese internal
+      omics_exposure:
+        label: 组学暴露
+        values_prompt: >
+          plasma proteins (pQTL-based), metabolites (mQTL-based),
+          protein + metabolite joint, gene expression + protein,
+          DNA methylation + protein, multi-omics causal network,
+          tissue-specific protein expression, cell-type-specific protein
+      outcome:
+        label: 结局
+        values_prompt: >
+          type 2 diabetes, cardiovascular disease (CVD), stroke,
+          chronic kidney disease, non-alcoholic fatty liver disease,
+          Alzheimer disease, all-cause mortality,
+          multi-disease comparative
+      cross_validation:
+        label: 跨种族验证
+        values_prompt: >
+          replication MR (independent population), replication PWAS,
+          cross-ancestry coloc, heterogeneity by population (I2),
+          trans-ancestry meta MR, population-specific pQTL MR,
+          leave-one-population-out validation, multi-ancestry fine-mapping + MR
+
+parameters:
+  min_populations: 2
+  min_omics_layers: 2
+  replication_required: true
+  harmonization_assessed: true
+
+research_direction: >
+  Integrate proteomics and metabolomics data from a 1000-person
+  Chinese cohort with UK Biobank (Olink 53K) and other international
+  biobanks to systematically assess multi-omics biomarker portability
+  across ancestries (EUR, EAS, AFR, SAS). Three parallel research lines:
+  (1) biomarker_portability — evaluate protein/metabolite biomarker
+  generalizability across Chinese and European populations, identifying
+  population-specific vs. conserved signals; (2) prs_transportability —
+  benchmark cross-ancestry PRS methods (PRS-CSx, LDpred2) with and
+  without multi-omics enhancement for complex traits; (3) causal_inference —
+  perform Mendelian randomization (MR), colocalization, and proteome-wide
+  association studies (PWAS) across populations to identify causal
+  proteins/metabolites and their cross-ethnic consistency. Synthesize
+  findings into multi-ethnic multi-omics risk scores (OMRS) that are
+  portable, calibrated, and clinically actionable.

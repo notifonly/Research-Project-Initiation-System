@@ -1,0 +1,76 @@
+archetype_id: archetype_f_spatial_gwas
+name: Spatial GWAS Network (scGWAS × Spatial Transcriptomics)
+description: >
+  Bridge scGWAS network module discovery with spatial transcriptomics
+  microdomain resolution. Apply dual-weight module search (scGWAS: Box-Cox
+  normalization + MEBE greedy expansion) to spatial gene specificity scores
+  (gsMap: GNN autoencoder + GSS), replacing PPI topology with spatial
+  neighborhood graph constraints. Output: trait-associated spatial gene
+  modules with both network topology and spatial coordinates.
+
+evidence_card_class: archetypes.archetype_f_spatial_gwas.evidence_card.SpatialGWASCard
+gap_patterns_module: archetypes.archetype_f_spatial_gwas.gap_patterns
+gap_patterns_attr: ARCHETYPE_F_GAP_PATTERNS
+
+coverage_axes:
+  - trait
+  - tissue_region
+  - cell_type
+  - spatial_platform
+  - method
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - openalex
+    - crossref
+  medium:
+    - biorxiv
+    - gwas_catalog
+    - open_targets
+    - europepmc
+    - geo
+    - cellxgene
+  low:
+    - ensembl
+    - encode
+
+parameters:
+  min_spatial_platforms: 1
+  min_traits: 1
+  min_tissue_regions: 1
+  network_module_required: true
+  spatial_resolution_required: true
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

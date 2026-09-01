@@ -1,0 +1,17 @@
+{
+  "n_seeds": 30,
+  "alpha": 0.3,
+  "max_module_size": 20,
+  "min_jaccard": 0.3,
+  "min_module_size": 3,
+  "n_permutations": 200,
+  "fdr_threshold": 0.2,
+  "random_state": 42,
+  "boxcox_lambda": 1.0756850713559172,
+  "n_genes_input": 500,
+  "n_spots": 100,
+  "n_seed_genes": 30,
+  "n_raw_modules": 30,
+  "n_consensus_modules": 2,
+  "n_significant_modules": 0
+}

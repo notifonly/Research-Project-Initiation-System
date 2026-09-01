@@ -1,0 +1,80 @@
+archetype_id: archetype_d_omics_score
+name: Multi-omics Phenotypic Scoring (Aging / Digital Immunity)
+description: >
+  Build multi-omics phenotypic scores (aging clocks, digital immunity scores)
+  with cross-omics integration, external validation, calibration, transportability,
+  clinical utility, and interpretability.
+
+evidence_card_class: archetypes.archetype_d_omics_score.evidence_card.OmicsScoreEvidenceCard
+gap_patterns_module: archetypes.archetype_d_omics_score.gap_patterns
+gap_patterns_attr: ARCHETYPE_D_GAP_PATTERNS
+
+coverage_axes:
+  - score_type
+  - omics_layers
+  - trait
+  - validation_cohort
+  - transportability
+
+skill_sequence:
+  - s1_direction_decompose
+  - s2_terminology_normalize
+  - s3_score_method_collect
+  - s4_multi_source_search
+  - s5_citation_snowball
+  - s6_literature_screening
+  - s7_evidence_card_extract
+  - s8_data_availability
+  - s9_method_dataset_match
+  - s11_gap_analysis
+  - s12_hypothesis_generate
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - geo
+    - github
+  medium:
+    - biorxiv
+    - papers_with_code
+    - cellxgene
+    - huggingface
+    - gwas_catalog
+  low:
+    - open_targets
+    - ensembl
+    - encode
+    - scperturb
+    - openreview
+
+parameters:
+  min_omics_layers_for_multi: 2
+  min_external_validation_cohorts: 2
+  min_age_range_span_years: 30
+  min_ancestry_diversity: 2
+  calibration_required: true
+  clinical_cutoff_required: true
+  longitudinal_eval_preferred: true
+  interpretability_required: true
+  comparison_to_clinical_score_required: true
+
+breakpoints:
+  - bp1_direction_decompose
+  - bp2_terminology
+  - bp4_reading_list
+  - bp5_evidence_card_overview
+  - bp6_gap_hypothesis
+  - bp7_final_map
+
+convergence:
+  inner_loop_or:
+    - query_exhausted
+    - citation_closed
+    - reflection_confirmed
+    - budget_token_exceeded
+  outer_loop_and:
+    - coverage_jaccard_gt_0.95_k2
+    - gap_yield_lt_20pct_new
+    - citation_network_closed
+  budget_failsafe: always_active

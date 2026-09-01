@@ -1,0 +1,114 @@
+project_id: p09_spatial_gwas_network
+name: scGWAS × 空间转录组学网络模块发现
+description: >
+  将 scGWAS 双权重网络模块搜索（Box-Cox 归一化 + MEBE 贪婪扩展）
+  集成到空间转录组学微域（gsMap GNN 自编码器 + GSS 评分），
+  以空间邻域图替代 PPI 网络，识别 trait-associated 空间基因模块。
+  核心创新：方法级融合，填补 scGWAS 无空间分辨率、gsMap 无网络模块的双重缺口。
+
+archetype_id: archetype_f_spatial_gwas
+context_hint: >
+  10x Visium, MERFISH, STARmap, gsMap, scGWAS, LDSC, S-LDSC, MAGMA,
+  脑组织 (cortex, hippocampus), 神经精神疾病 GWAS
+
+mcp_priorities:
+  high:
+    - semantic_scholar
+    - pubmed
+    - openalex
+    - crossref
+  medium:
+    - biorxiv
+    - gwas_catalog
+    - open_targets
+    - europepmc
+    - geo
+    - cellxgene
+  low:
+    - ensembl
+    - encode
+
+extra_skills: {}
+
+convergence:
+  strategy: candidate_driven
+  max_candidates: 1
+  shuffle_order: false
+  max_outer_rounds: 4
+
+parameters:
+  min_spatial_platforms: 1
+  min_traits: 1
+  min_tissue_regions: 1
+  network_module_required: true
+  spatial_resolution_required: true
+
+research_direction: >
+  Apply scGWAS dual-weight module search (Box-Cox normalization + MEBE greedy expansion)
+  to spatial transcriptomics microdomain Gene Specificity Scores (GSS) from gsMap's
+  GNN autoencoder pipeline. Replace the PPI network topology in scGWAS with a spatial
+  neighborhood graph (k-NN on spot coordinates or spatial weight matrix), then perform
+  MEBE greedy expansion under spatial proximity constraints. Use spatial permutation
+  tests (spot coordinate shuffling preserving tissue structure) as the null distribution
+  for module significance. Output: trait-associated spatial gene network modules with
+  both network topology (co-expression/co-regulation) and spatial coordinates (microdomain
+  localization). Validate on neuropsychiatric GWAS + brain ST data (10x Visium + MERFISH),
+  benchmark against MAGMA, LDSC-SEG, S-LDSC, and scGWAS baselines.
+
+seeded_candidate:
+  topic_id: p09_spatial_gwas_network_T000
+  research_question: >
+    Can scGWAS-style dual-weight network module search, when adapted from PPI topology
+    to spatial neighborhood graphs, recover trait-associated gene co-expression modules
+    in spatial transcriptomics microdomains that are invisible to enrichment-only methods
+    like gsMap and spatially-blind methods like scGWAS?
+  disease: neuropsychiatric disorders (schizophrenia, bipolar, autism)
+  tissue: brain cortex + hippocampus
+  method: >
+    scGWAS dual-weight module score (m = mg + ms - |mg-ms|/√2) × spatial neighborhood
+    graph (k-NN on 10x Visium spot coordinates) + MEBE greedy expansion/contraction
+    under spatial proximity constraint + spatial permutation null (spot-shuffle preserving
+    tissue architecture) + proportional test for trait-cell-type enrichment
+  population: EUR (PGC GWAS) + human brain ST (10x Visium, MERFISH)
+  data_resource: >
+    PGC GWAS summary statistics (SCZ/BPD/ASD), 10x Visium human brain (DLPFC, hippocampus),
+    MERFISH mouse brain (Cell Atlas), gsMap precomputed GSS scores, STRING PPI v12
+  dimensions_raw:
+    trait: neuropsychiatric (SCZ/BPD/ASD)
+    tissue_region: brain cortex (DLPFC) + hippocampus
+    cell_type: cortical pyramidal neurons + hippocampal CA1 neurons
+    spatial_platform: 10x Visium + MERFISH cross-platform
+    method: scGWAS dual-weight + spatial neighborhood graph + MEBE
+  seeded_papers:
+    - title: "scGWAS: landscape of trait-cell type associations by integrating GWAS and scRNA-seq"
+      doi: "10.1186/s13059-022-02644-2"
+      year: 2022
+      venue: Genome Biology
+      authors: ["Jia P", "Hu R", "Zhao Z"]
+      key_findings:
+        - Box-Cox normalization + dual-weight module score with soft-min penalty
+        - MEBE greedy expansion/pruning algorithm for PPI network module search
+        - Virtual search null distribution + proportional test for trait-cell type enrichment
+        - 53 tissue-cell type associations found across 7 auto-immune traits
+      gap_surface: No spatial coordinates; PPI-only topology; no baseline vs LDSC-SEG/MAGMA
+    - title: "gsMap: spatial mapping of GWAS signals to tissue microenvironments"
+      doi: "10.1038/s41586-025-08846-z"
+      year: 2025
+      venue: Nature
+      authors: ["Song L", "Chen Y", "Yi X"]
+      key_findings:
+        - GNN autoencoder producing 32-dim gene embeddings for spatial microdomains
+        - Gene Specificity Scores (GSS) via geometric mean rank ratio
+        - GSS-mapped SNP annotations for per-spot S-LDSC enrichment
+        - Cauchy combination test for spatial region aggregation
+      gap_surface: Only enrichment testing (no network modules); GNN module no ablation
+    - title: "Spatial GWAS Atlas: a comprehensive database of GWAS-associated spatial transcriptomic regions"
+      doi: "10.1093/nar/gkaf126"
+      year: 2026
+      venue: Nucleic Acids Research
+      authors: ["Kang X", "Li Z", "Wang J"]
+      key_findings:
+        - Applied gsMap to 3854 GWAS × 635 ST datasets
+        - 1.75M trait-region associations catalogued
+        - Web interface for querying trait-region pairs
+      gap_surface: Pure curation/engineering; no new methods; no network module output

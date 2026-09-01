@@ -1,0 +1,76 @@
+[
+  {
+    "topic_id": "p05_agent_router_001",
+    "rubric": "cross_domain",
+    "research_question": "How can a multi-scFM router agent that dynamically selects the optimal foundation model architecture (Transformer-based scGPT for context-rich tasks, Mamba-based RegFormer for long-sequence modeling, VQ-VAE-based cellVQ for interpretable representations) based on input characteristics (tissue context, cell type specificity, sequence length, task type) improve cell-type annotation accuracy and computational efficiency compared to single-model baselines on the CELLxGENE multi-tissue benchmark?",
+    "dimensions": {
+      "method": "Multi-scFM Router Agent (Transformer+Mamba+VQ-VAE orchestration)",
+      "disease": "Pan-cancer (CELLxGENE census, 36M cells, 700+ datasets)",
+      "agent_framework": "Feature-based router: tissue-type embedding → model selector → task-specific adapter",
+      "agent_capability": "Dynamic architecture selection maximizing accuracy-efficiency Pareto frontier",
+      "evaluation_benchmark": "CELLxGENE census + scIB (single-cell integration benchmark)"
+    },
+    "scores": {
+      "combined": 0.98,
+      "novelty": 0.95,
+      "feasibility": 0.88,
+      "competitiveness": 0.05
+    },
+    "rationale": "Current scFM research studies models in isolation (transformer-only, VAE-only). This direction pioneers the 'agent over foundation models' paradigm for single-cell genomics — an orchestrator that routes queries to the optimal architecture based on task characteristics. Directly addresses C11 (architecture homogeneity gap) by making architectural diversity a design feature rather than a gap. Analogy: LangChain agent routing queries to GPT-4 vs Claude vs Gemini based on task.",
+    "search_query": "multi-model orchestration foundation model architecture selection single-cell RNA-seq Mamba transformer",
+    "prefetched_papers": [
+      {"title": "ChemCrow: Augmenting large-language models with chemistry tools", "doi": "10.1038/s42256-024-00832-8", "year": 2024, "venue": "Nature Machine Intelligence", "relevance": "LLM agent orchestrating scientific tools for autonomous research"},
+      {"title": "AROMA: Adaptive Orchestration for Robust and Cost-Efficient Multi-Agent LLM Systems", "doi": "10.22541/au.177403077.77403552/v1", "year": 2026, "venue": "Wiley", "relevance": "Adaptive multi-agent orchestration with dynamic role assignment"},
+      {"title": "An autonomous LLM-agent platform for computational binder design and conjugation-aware prioritization", "doi": "10.64898/2026.04.21.719907", "year": 2026, "venue": "bioRxiv", "relevance": "Autonomous LLM-agent platform orchestrating 32 bioinformatics tools"},
+      {"title": "Benchmarking atlas-level data integration in single-cell genomics", "doi": "10.1038/s41592-021-01336-8", "year": 2022, "venue": "Nature Methods", "relevance": "Standardized single-cell benchmark framework (scIB) for multi-model comparison"},
+      {"title": "GeneMamba: A Unified Framework for Single-Cell Analysis", "doi": "10.48550/arXiv.2504.16956", "year": 2025, "venue": "arXiv", "relevance": "Mamba-based scFM as non-Transformer alternative in the model pool"}
+    ]
+  },
+  {
+    "topic_id": "p05_agent_rl_002",
+    "rubric": "cross_domain",
+    "research_question": "Can a contextual multi-armed bandit agent that learns to select the optimal single-cell foundation model (scGPT, Geneformer, RegFormer, scVI, UCE) for each query based on dataset characteristics (tissue type, cell type rarity, sequencing depth, sparsity level, gene count) outperform both single-model baselines and naive ensemble methods on cell-type annotation F1-score and computational cost Pareto efficiency across the CELLxGENE multi-tissue benchmark (36M cells, 700+ datasets)?",
+    "dimensions": {
+      "method": "Contextual Bandit Agent for Optimal scFM Selection",
+      "disease": "Pan-cancer (CELLxGENE census, 36M cells, 700+ datasets)",
+      "agent_framework": "Feature-based context encoder → LinUCB/Thompson Sampling → model selection → task execution",
+      "agent_capability": "Data-driven architecture selection maximizing accuracy-efficiency Pareto frontier",
+      "evaluation_benchmark": "CELLxGENE census + scIB (single-cell integration benchmark)"
+    },
+    "scores": {
+      "combined": 0.96,
+      "novelty": 0.90,
+      "feasibility": 0.92,
+      "competitiveness": 0.08
+    },
+    "rationale": "Current scFM benchmarking treats model selection as a one-size-fits-all problem. This direction frames model selection as an online learning problem: a contextual bandit agent observes dataset features and learns which model architecture performs best for which data regime. Unlike continuous RL in latent space (which requires novel method invention), contextual bandits with LinUCB/Thompson Sampling are well-established methods with proven theoretical guarantees. The agent learns a selection policy that maximizes annotation accuracy while respecting computational budget constraints.",
+    "search_query": "contextual bandit model selection foundation model single-cell benchmark LinUCB Thompson sampling AutoML",
+    "prefetched_papers": [
+      {"title": "A Contextual-Bandit Approach to Personalized News Article Recommendation", "doi": "10.1145/1772690.1772758", "year": 2010, "venue": "WWW", "relevance": "Foundational LinUCB algorithm for contextual bandits"},
+      {"title": "AutoML-Zero: Evolving Machine Learning Algorithms from Scratch", "doi": "10.48550/arXiv.2003.03384", "year": 2020, "venue": "arXiv", "relevance": "Automated ML pipeline selection paradigm for discrete action spaces"},
+      {"title": "Benchmarking atlas-level data integration in single-cell genomics", "doi": "10.1038/s41592-021-01336-8", "year": 2022, "venue": "Nature Methods", "relevance": "scIB framework for systematic multi-model evaluation"},
+      {"title": "A Contextual Bandit Approach for Efficient Model Selection in Healthcare", "doi": "10.48550/arXiv.2106.01874", "year": 2021, "venue": "arXiv", "relevance": "Bandit-based model selection in biomedical domain with real-world constraints"},
+      {"title": "scGPT: Toward Building a Foundation Model for Single-Cell Multi-Omics", "doi": "10.1038/s41592-024-02201-0", "year": 2024, "venue": "Nature Methods", "relevance": "Transformer-based scFM as candidate model in the bandit action space"}
+    ]
+  },
+  {
+    "topic_id": "p05_agent_benchmark_003",
+    "rubric": "cross_domain",
+    "research_question": "How can a self-evolving benchmark agent that continuously evaluates single-cell foundation models across 12 tasks (cell-type annotation, batch integration, perturbation prediction, gene regulatory network inference, imputation, zero-shot generalization, etc.), automatically identifies model weaknesses through performance decomposition analysis, and extends the benchmark suite with targeted adversarial evaluations, produce more comprehensive and fair model comparisons than static benchmark suites (scIB, OpenProblems) measured by inter-model ranking stability and coverage of failure modes?",
+    "dimensions": {
+      "method": "Self-Evolving Benchmark Agent (continuous evaluation + adaptive suite expansion)",
+      "disease": "Cross-task generalization (12 scFM evaluation tasks)",
+      "agent_framework": "Evaluation engine → weakness detection → adversarial test generation → suite expansion loop",
+      "agent_capability": "Autonomous benchmark curation that grows with model capabilities",
+      "evaluation_meta_metric": "Inter-model ranking stability & failure mode coverage"
+    },
+    "scores": {
+      "combined": 0.94,
+      "novelty": 0.90,
+      "feasibility": 0.85,
+      "competitiveness": 0.06
+    },
+    "rationale": "Static benchmarks (scIB, OpenProblems) become obsolete as models improve — a classic Goodhart's law problem ('when a metric becomes a target, it ceases to be a good metric'). This direction builds a self-evolving benchmark agent that autonomously identifies model weaknesses and generates new evaluation dimensions, creating a living benchmark that co-evolves with model capabilities. Directly extends P05's core benchmarking mission into an agent paradigm.",
+    "search_query": "self-evolving benchmark adversarial evaluation foundation model weakness discovery continuous leaderboard single-cell"
+  }
+]
