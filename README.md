@@ -41,6 +41,12 @@
 |---|---|
 | ![P09](assets/screenshots/dashboard_p09.png) | ![Dark mode](assets/screenshots/dashboard_overview_dark.png) |
 
+## P09 已通过方案案例
+
+下面是一张完整案例长图，展示 P09 中最终通过的研究方案：从研究问题、迭代评分、技术路线、方法论红队评审、评审意见，到引用验证和证据锚定。
+
+![P09 passed research proposal case study](assets/screenshots/p09_passed_case_study.png)
+
 ## 它能做什么
 
 - **9 个研究子项目、6 种研究范式**：覆盖 GWAS 因果基因鉴定、跨祖先 PRS、单细胞多组学基础模型、数字免疫、衰老时钟、跨种族多组学、scGWAS × 空间转录组网络模块等方向。
