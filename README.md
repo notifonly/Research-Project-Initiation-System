@@ -13,6 +13,10 @@
 
 > 当前版本仍是研究原型：核心流水线已能端到端运行，但距离生产级平台还有工程化、部署与评测基础设施方面的打磨空间。
 
+## Dashboard
+
+![AIscience Dashboard overview](assets/dashboard_overview.png)
+
 ## 它能做什么
 
 - **9 个研究子项目、6 种研究范式**：覆盖 GWAS 因果基因鉴定、跨祖先 PRS、单细胞多组学基础模型、数字免疫、衰老时钟、跨种族多组学、scGWAS × 空间转录组网络模块等方向。
