@@ -15,7 +15,31 @@
 
 ## Dashboard
 
-![AIscience Dashboard overview](assets/dashboard_overview.png)
+以下截图来自离线 Dashboard，覆盖研究方向、技术路线/管线进度、文献证据、Gap、假设、方向分解、方案质量评测等关键视图。
+
+| 概览 | 技术路线 / 管线分析 |
+|---|---|
+| ![Overview](assets/screenshots/dashboard_overview.png) | ![Pipeline](assets/screenshots/dashboard_pipeline.png) |
+
+| 文献证据 | 研究缺口 |
+|---|---|
+| ![Evidence](assets/screenshots/dashboard_evidence.png) | ![Gaps](assets/screenshots/dashboard_gaps.png) |
+
+| 研究假设 | 开题建议 |
+|---|---|
+| ![Hypotheses](assets/screenshots/dashboard_hypotheses.png) | ![Proposals](assets/screenshots/dashboard_proposals.png) |
+
+| 方向分解 | 方向对比 |
+|---|---|
+| ![Decompose](assets/screenshots/dashboard_decompose.png) | ![Compare](assets/screenshots/dashboard_compare.png) |
+
+| P05 方案质量 | P08 方案质量 |
+|---|---|
+| ![P05](assets/screenshots/dashboard_p05.png) | ![P08](assets/screenshots/dashboard_p08.png) |
+
+| P09 方案质量 | 暗色模式 |
+|---|---|
+| ![P09](assets/screenshots/dashboard_p09.png) | ![Dark mode](assets/screenshots/dashboard_overview_dark.png) |
 
 ## 它能做什么
 
